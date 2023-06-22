@@ -1,36 +1,28 @@
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import React from 'react';
-import ApiCalendar from 'react-google-calendar-api';
 
-const config = {
-    clientId: "163894081707-kp7376uehdsngen6r7b87n3h9kb34of1.apps.googleusercontent.com",
-    apiKey: "AIzaSyAJyczGD_19m3ZoMj-6iWvZoxsgcSPXyvw",
-    scope: "https://www.googleapis.com/auth/calendar",
-    discoveryDocs: [
-        "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
-    ]
-}
+// clientId: '36728639176-6g0qhv5shafsrmdm5v4ncodgbmm85vvt.apps.googleusercontent.com',
+// apiKey: 'AIzaSyAJyczGD_19m3ZoMj-6iWvZoxsgcSPXyvw',
+// scope: 'https://www.googleapis.com/auth/calendar',
+// discoveryDocs: [
+//     'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'
+// ]
 
-const apiCalendar = new ApiCalendar(config);
-
-const DoubleButton = () => {
-    const handleItemClick = (event, name) => {
-        if (name === 'sign-in') {
-            apiCalendar.handleAuthClick();
-        } else if (name === 'sign-out') {
-            apiCalendar.handleSignoutClick();
-        }
-    }
+const GoogleCalender = () => {
 
     return (
-        <>
-            <button onClick={(e) => handleItemClick(e, 'sign-in')}>
-                Sign In
-            </button>
-            <button onClick={(e) => handleItemClick(e, 'sign-out')}>
-                Sign Out
-            </button>
-        </>
+        <GoogleOAuthProvider clientId="36728639176-6g0qhv5shafsrmdm5v4ncodgbmm85vvt.apps.googleusercontent.com">
+            <GoogleLogin
+                scope="https://www.googleapis.com/auth/calendar"
+                onSuccess={credentialResponse => {
+                    console.log(credentialResponse);
+                }}
+                onError={() => {
+                    console.log('Login Failed');
+                }}
+            />
+        </GoogleOAuthProvider>
     );
 };
 
-export default DoubleButton;
+export default GoogleCalender;
