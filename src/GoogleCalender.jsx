@@ -20,6 +20,7 @@ const GoogleCalendar = () => {
             if (apiCalendar.sign) {
                 try {
                     const response = await apiCalendar.listUpcomingEvents();
+                    console.log('Events:', response);
                     setEvents(response.result.items);
                 } catch (error) {
                     console.error('Error fetching events:', error);
@@ -59,7 +60,7 @@ const GoogleCalendar = () => {
                 </div>
             ) : (
                 <button onClick={(e) => handleItemClick(e, 'sign-in')}>
-                    Sign In with Google
+                    Sign In with Google Calendar
                 </button>
             )}
         </>
